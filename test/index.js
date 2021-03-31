@@ -22,4 +22,11 @@ describe('Index', function() {
       );
     });
   });
+  describe('.obj', function() {
+    it('should present a JavaScript object literal', function() {
+      let my_obj = my_index.obj;
+      assert.equal('A Title', my_obj.title);
+      assert.equal('A Piece of Content', my_obj.content);
+    });
+  })
 });

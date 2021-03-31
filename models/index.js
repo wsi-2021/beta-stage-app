@@ -5,8 +5,11 @@ class Index {
     this.title = title;
     this.content = content;
   }
+  get obj() {
+    return { title: this.title, content: this.content };
+  }
   get json() {
-    return JSON.stringify({title: this.title, content: this.content});
+    return JSON.stringify(this.obj);
   }
 }
 
