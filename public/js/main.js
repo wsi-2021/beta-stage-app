@@ -12,7 +12,11 @@ function sortTable(table, columnIndex, order) {
   console.log(rows.length, 'rows');
 
   rows.sort(function (a, b) {
-    return a.cells[columnIndex].dataset.value > b.cells[columnIndex].dataset.value ? 1 : -1;
+    if (isNaN(a.cells[columnIndex].dataset.value)) {
+      return a.cells[columnIndex].dataset.value > b.cells[columnIndex].dataset.value ? 1 : -1;
+    } else {
+      return a.cells[columnIndex].dataset.value - b.cells[columnIndex].dataset.value;
+    }
   });
 
   if (order === 'desc') {
