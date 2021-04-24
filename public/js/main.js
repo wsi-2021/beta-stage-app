@@ -3,8 +3,10 @@ var table = document.querySelector('table#records');
 table.addEventListener('click', function(e) {
   if (e.target.tagName !== 'TH') return; // leave if not a <th> element
   var th = e.target;
-  sortTable(table, th.cellIndex, th.className);
   th.classList.toggle('desc');
+  sortTable(table, th.cellIndex, th.className);
+  localStorage.setItem('cellIndex', th.cellIndex);
+  localStorage.setItem('order', th.className);
 });
 
 function sortTable(table, columnIndex, order) {
@@ -21,6 +23,7 @@ function sortTable(table, columnIndex, order) {
 
   if (order === 'desc') {
     rows.reverse();
+    localStorage.setItem('order','desc');
   }
 
   table.querySelector('tbody').append(...rows);
@@ -54,7 +57,15 @@ if (days_nav) {
           td[2].dataset.value = d.total_doses_cumulative;
           td[2].innerText = d.total_doses_cumulative;
           tbody.append(tr);
-        }        
+        }
+
+        if (localStorage.getItem('cellIndex')) {
+          var ci = localStorage.getItem('cellIndex');
+          var order = localStorage.getItem('order');
+          document.querySelectorAll('thead th')[ci].className = order;
+          sortTable(table, ci, order);
+        }
+
         // Change the URL without actually making the request
         // See https://developer.mozilla.org/en-US/docs/Web/API/History/pushState
         history.pushState('','',href);
