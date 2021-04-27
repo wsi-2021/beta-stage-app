@@ -18,7 +18,8 @@ after_success:
   - chmod 600 .travis/id_rsa
   - ssh-add .travis/id_rsa
   - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-  - cd wsi-2021/beta-stage-app
-  - git checkout main
+  - cd ~
+  - git clone https://github.com/wsi-2021/beta-stage-app.git beta-stage-app
+  - cd beta-stage-app
   - git remote add deploy $CUSTOM_DEPLOY_URL
   - git push deploy main
