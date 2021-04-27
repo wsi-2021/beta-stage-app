@@ -2,6 +2,5 @@
 const {seedDatabase, destroyDatabase} = require('../db/seed');
 
 (async function() {
-  try {
     await seedDatabase();
 })();
