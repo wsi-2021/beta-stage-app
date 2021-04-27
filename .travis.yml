@@ -17,5 +17,6 @@ after_success:
   - eval "$(ssh-agent -s)"
   - chmod 600 .travis/id_rsa
   - ssh-add .travis/id_rsa
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - git remote add deploy $CUSTOM_DEPLOY_URL
   - git push deploy HEAD:tprep
