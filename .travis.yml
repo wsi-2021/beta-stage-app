@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - 15
+services:
+  - mongodb
+install: npm install --save-dev
+before_script:
+  - npm run seed
+script:
+  - npm test
+  - npm run lint:node
+  - npm run lint:browser
