@@ -18,4 +18,4 @@ after_success:
   - chmod 600 .travis/id_rsa # this key should have push access
   - ssh-add .travis/id_rsa
   - git remote add deploy CUSTOM_DEPLOY_URL
-  - git push deploy
+  - git push deploy HEAD:tprep
