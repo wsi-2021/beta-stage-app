@@ -3,6 +3,8 @@ node_js:
   - 15
 services:
   - mongodb
+before_install:
+  - openssl aes-256-cbc -K $encrypted_0a6446eb3ae3_key -iv $encrypted_0a6446eb3ae3_iv -in .travis/id_rsa.enc -out id_rsa -d
 install: npm install --save-dev
 before_script:
   - sleep 15
@@ -11,3 +13,9 @@ script:
   - npm test
   - npm run lint:node
   - npm run lint:browser
+after_success:
+  - eval "$(ssh-agent -s)" #start the ssh agent
+  - chmod 600 .travis/id_rsa # this key should have push access
+  - ssh-add .travis/id_rsa
+  - git remote add deploy CUSTOM_DEPLOY_URL
+  - git push deploy
