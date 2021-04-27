@@ -1,0 +1,7 @@
+#! /usr/bin/env node
+const {seedDatabase, destroyDatabase} = require('../db/seed');
+
+(async function() {
+  await destroyDatabase();
+  await seedDatabase();
+})();
