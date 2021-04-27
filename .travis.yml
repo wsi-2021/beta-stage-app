@@ -5,6 +5,7 @@ services:
   - mongodb
 install: npm install --save-dev
 before_script:
+  - sleep 15
   - npm run seed
 script:
   - npm test
